@@ -41,7 +41,7 @@ public class CRUDTicketsStepdefs {
 
     @When("Trying to add a ticket with name {string} and description {string} and creator {string}")
     public void trying_to_add_a_ticket_with_name_and_description_and_creator(String name, String description, String creator) {
-        var ticketCreationRequest = new TicketCreationRequest(
+        TicketCreationRequest ticketCreationRequest = new TicketCreationRequest(
                 name,
                 description,
                 "severity",
@@ -80,7 +80,7 @@ public class CRUDTicketsStepdefs {
 
         TicketUpdateRequest ticketUpdateRequest;
         if(!ticket_list.isEmpty()) {
-            var ticket = ticket_list.get(0);
+            Ticket ticket = ticket_list.get(0);
             ticketUpdateRequest = new TicketUpdateRequest(
                     ticket.getId(),
                     ticket.getName(),
@@ -113,7 +113,7 @@ public class CRUDTicketsStepdefs {
 
     @Then("the TicketService contains a ticket with name {string} and description {string}")
     public void the_ticket_service_contains_a_ticket_with_name_and_description(String name, String description) {
-        var tickets = this.ticketRepository.findByName(name);
+        List<Ticket> tickets = this.ticketRepository.findByName(name);
         assertEquals(1, tickets.size());
         assertEquals(description, tickets.get(0).getDescription());
     }

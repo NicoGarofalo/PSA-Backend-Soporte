@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 public class TicketMapper {
 
     public Ticket mapToTicket(TicketCreationRequest ticketCreationRequest){
-        var ticket = new Ticket();
+        Ticket ticket = new Ticket();
         return this.mapTicketInfo(ticketCreationRequest, ticket);
     }
 
     public Ticket mapToTicket(TicketUpdateRequest ticketUpdateRequest){
-        var ticket = new Ticket();
+        Ticket ticket = new Ticket();
         ticket.setId(ticketUpdateRequest.getId());
         return this.mapTicketInfo(ticketUpdateRequest, ticket);
     }

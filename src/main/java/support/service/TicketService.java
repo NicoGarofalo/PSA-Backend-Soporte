@@ -1,5 +1,6 @@
 package support.service;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import support.exception.UnknownTicketException;
 import lombok.AllArgsConstructor;
 import support.mapper.TicketMapper;
@@ -11,6 +12,7 @@ import support.repository.TicketRepository;
 import support.exception.UnknownTicketException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -39,9 +41,10 @@ public class TicketService {
     }
 
     public void deleteById(long id){
-        if(this.ticketRepository.findById(id).isEmpty()){
-            throw new UnknownTicketException();
+        try {
+            this.ticketRepository.deleteById(id);
+        }catch(EmptyResultDataAccessException erdae){
+            throw new UnknownTicketException(erdae.getMessage());
         }
-        this.ticketRepository.deleteById(id);
     }
 }

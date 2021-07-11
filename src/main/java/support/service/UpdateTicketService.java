@@ -20,9 +20,7 @@ public class UpdateTicketService {
     private final TicketMapper mapper;
     
     public Ticket updateTicketInfo(TicketUpdateRequest ticketUpdate){
-        if(this.ticketRepository.findById(ticketUpdate.getId()).isEmpty()){
-            throw new UnknownTicketException();
-        }
+        this.ticketRepository.findById(ticketUpdate.getId()).orElseThrow(UnknownTicketException::new);
         return this.ticketRepository.save(mapper.mapToTicket(ticketUpdate));
     }
 }
