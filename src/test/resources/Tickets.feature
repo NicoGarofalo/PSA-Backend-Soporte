@@ -40,7 +40,7 @@ Feature: TicketService creating, reading, updating and deleting tickets
     When Trying to update description of the ticket with name "Ticket1" to "Updated description for ticket 1"
     Then Operation should be denied due to updating a non existent ticket
 
-  Scenario: Cannot cannot delete a non existent ticket
+  Scenario: Cannot delete a non existent ticket
     Given An empty TicketService
     When Trying to delete a ticket with name "Ticket1"
     Then Operation should be denied due to deleting a non existent ticket
