@@ -11,4 +11,5 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     List<Ticket> findByName(String name);
+    List<Ticket> findByProductId(Long name);
 }

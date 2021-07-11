@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class TicketUpdateRequest implements TicketRequest{
     private final long id;
+    private final long productId;
     private final String name;
     private final String description;
     private final String severity;

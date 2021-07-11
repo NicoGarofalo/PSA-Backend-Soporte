@@ -8,6 +8,7 @@ import lombok.Getter;
 public class TicketCreationRequest implements TicketRequest{
 
     private final String name;
+    private final long productId;
     private final String description;
     private final String severity;
     private final String creator;

@@ -31,6 +31,7 @@ public class TicketMapper {
         ticket.setCreator(ticketRequest.getCreator());
         ticket.setCreationDate(LocalDateTime.now());
         ticket.setExpirationDate(LocalDateTime.now());
+        ticket.setProductId(ticketRequest.getProductId());
 
         return ticket;
     }

@@ -19,6 +19,7 @@ public class Ticket {
     @Id
     @GeneratedValue
     private Long id;
+    private Long productId;
     private String name;
     private String description;
     private String severity;

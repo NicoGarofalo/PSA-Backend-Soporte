@@ -1,0 +1,1 @@
+Agregar server.port (con algun valor para el puerto) a VM options para correr app y tests localmente.

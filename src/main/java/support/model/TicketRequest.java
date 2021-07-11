@@ -7,4 +7,5 @@ public interface TicketRequest {
     String getCreator();
     String getClient();
     String getState();
+    long getProductId();
 }

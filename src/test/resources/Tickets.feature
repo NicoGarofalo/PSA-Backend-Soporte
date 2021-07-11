@@ -5,6 +5,11 @@ Feature: TicketService creating, reading, updating and deleting tickets
     When Trying to add a ticket with name "Ticket1" and description "Ticket 1 description" and creator "creator"
     Then the TicketService contains a ticket with name "Ticket1"
 
+  Scenario: Successfully create a ticket with productId
+    Given An empty TicketService
+    When Trying to add a ticket with name "Ticket1" and description "Ticket 1 description" and creator "creator" and productId 1
+    Then the TicketService contains a ticket with productId 1
+
 
   Scenario: Successfully create multiple tickets
     Given An empty TicketService

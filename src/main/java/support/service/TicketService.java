@@ -40,6 +40,10 @@ public class TicketService {
         return this.ticketRepository.findByName(name);
     }
 
+    public List<Ticket> findByProductId(Long productId){
+        return this.ticketRepository.findByProductId(productId);
+    }
+
     public void deleteById(long id){
         try {
             this.ticketRepository.deleteById(id);

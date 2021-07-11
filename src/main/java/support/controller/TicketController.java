@@ -37,6 +37,11 @@ public class TicketController {
         return this.ticketService.findAllTickets();
     }
 
+    @GetMapping("/ticket/product/{productId}")
+    public List<Ticket> getTicketsByProductId(@PathVariable long productId){
+        return this.ticketService.findByProductId(productId);
+    }
+
     @GetMapping("/ticket/{ticketId}")
     public Ticket getTicketInfo(@PathVariable long ticketId){
         return this.ticketService.findTicketInfo(ticketId);

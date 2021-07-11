@@ -43,6 +43,7 @@ public class CRUDTicketsStepdefs {
     public void trying_to_add_a_ticket_with_name_and_description_and_creator(String name, String description, String creator) {
         TicketCreationRequest ticketCreationRequest = new TicketCreationRequest(
                 name,
+                1L,
                 description,
                 "severity",
                 creator,
@@ -52,9 +53,30 @@ public class CRUDTicketsStepdefs {
         this.ticketService.createTicket(ticketCreationRequest);
 
     }
+
+    @When("Trying to add a ticket with name {string} and description {string} and creator {string} and productId {int}")
+    public void trying_to_add_a_ticket_with_name_and_description_and_creator_and_product_id(String name, String description, String creator, int productId) {
+        TicketCreationRequest ticketCreationRequest = new TicketCreationRequest(
+                name,
+                (long) productId,
+                description,
+                "severity",
+                creator,
+                "client",
+                "state"
+        );
+        this.ticketService.createTicket(ticketCreationRequest);
+    }
+
+    @Then("the TicketService contains a ticket with productId {int}")
+    public void the_ticket_service_contains_a_ticket_with_product_id(int productId) {
+        assertEquals(1, this.ticketService.findByProductId((long) productId).size());
+    }
+
+
     @Then("the TicketService contains a ticket with name {string}")
     public void the_ticket_service_contains_a_ticket_with_name(String name) {
-        assertEquals(this.ticketService.findByName(name).size(), 1);
+        assertEquals(1, this.ticketService.findByName(name).size());
     }
 
 
@@ -83,6 +105,7 @@ public class CRUDTicketsStepdefs {
             Ticket ticket = ticket_list.get(0);
             ticketUpdateRequest = new TicketUpdateRequest(
                     ticket.getId(),
+                    ticket.getProductId(),
                     ticket.getName(),
                     description,
                     ticket.getSeverity(),
@@ -94,6 +117,7 @@ public class CRUDTicketsStepdefs {
         else{
             ticketUpdateRequest = new TicketUpdateRequest(
                     999999999,
+                    1,
                     "aaa",
                     "aaa",
                     "aaa",
