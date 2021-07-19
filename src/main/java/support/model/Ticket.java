@@ -2,8 +2,10 @@ package support.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import support.model.enums.Priority;
+import support.model.enums.Severity;
+import support.model.enums.State;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,10 +24,12 @@ public class Ticket {
     private Long productId;
     private String name;
     private String description;
-    private String severity;
-    private String creator;
-    private String client;
+    private Severity severity;
+    private String creatorName;
+    private String clientId;
+    private Priority priority;
     private LocalDateTime creationDate;
+    private LocalDateTime resolvedDate;
     private LocalDateTime expirationDate;
-    private String state;
+    private State state;
 }

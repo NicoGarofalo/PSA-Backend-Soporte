@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import support.exception.UnknownTicketException;
 import support.mapper.TicketMapper;
+import support.model.Client;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import support.model.TicketUpdateRequest;
+import support.model.enums.Severity;
+import support.model.enums.State;
 import support.repository.TicketRepository;
 import support.service.TicketService;
 import support.service.UpdateTicketService;
@@ -45,10 +48,10 @@ public class CRUDTicketsStepdefs {
                 name,
                 1L,
                 description,
-                "severity",
+                Severity.S1,
                 creator,
-                "client",
-                "state"
+                "1",
+                State.IN_PROGRESS
         );
         this.ticketService.createTicket(ticketCreationRequest);
 
@@ -60,10 +63,10 @@ public class CRUDTicketsStepdefs {
                 name,
                 (long) productId,
                 description,
-                "severity",
+                Severity.S1,
                 creator,
-                "client",
-                "state"
+                "1",
+                State.IN_PROGRESS
         );
         this.ticketService.createTicket(ticketCreationRequest);
     }
@@ -109,8 +112,8 @@ public class CRUDTicketsStepdefs {
                     ticket.getName(),
                     description,
                     ticket.getSeverity(),
-                    ticket.getCreator(),
-                    ticket.getClient(),
+                    ticket.getCreatorName(),
+                    ticket.getClientId(),
                     ticket.getState()
             );
         }
@@ -120,10 +123,10 @@ public class CRUDTicketsStepdefs {
                     1,
                     "aaa",
                     "aaa",
+                    Severity.S2,
                     "aaa",
-                    "aaa",
-                    "aaa",
-                    "aaa"
+                    "1",
+                    State.RESOLVED
             );
 
         }

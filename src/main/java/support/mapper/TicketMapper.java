@@ -25,10 +25,10 @@ public class TicketMapper {
 
     private Ticket mapTicketInfo(TicketRequest ticketRequest, Ticket ticket){
         ticket.setName(ticketRequest.getName());
-        ticket.setClient(ticketRequest.getClient());
+        ticket.setClientId(ticketRequest.getClientId());
         ticket.setDescription(ticketRequest.getDescription());
         ticket.setSeverity(ticketRequest.getSeverity());
-        ticket.setCreator(ticketRequest.getCreator());
+        ticket.setCreatorName(ticketRequest.getCreator());
         ticket.setCreationDate(LocalDateTime.now());
         ticket.setExpirationDate(LocalDateTime.now());
         ticket.setProductId(ticketRequest.getProductId());

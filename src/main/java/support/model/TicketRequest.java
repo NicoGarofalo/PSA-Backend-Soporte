@@ -1,11 +1,14 @@
 package support.model;
 
+import support.model.enums.Severity;
+import support.model.enums.State;
+
 public interface TicketRequest {
     String getName();
     String getDescription();
-    String getSeverity();
+    Severity getSeverity();
     String getCreator();
-    String getClient();
-    String getState();
+    String getClientId();
+    State getState();
     long getProductId();
 }
