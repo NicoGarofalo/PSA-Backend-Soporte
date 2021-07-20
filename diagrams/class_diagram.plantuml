@@ -1,0 +1,134 @@
+@startuml
+
+class "Client" {
+  id : Long
+  razonSocial : String
+}
+
+enum "Priority" {
+  BAJA
+  MEDIA
+  ALTA
+  CRITICA
+}
+
+enum "Severity" {
+  S1
+  S2
+  S3
+  S4
+}
+
+enum "State" {
+  NEW
+  IN_PROGRESS
+  BLOCKED
+  RESOLVED
+}
+
+class "SupportApp"
+
+class "Ticket" {
+  id : Long
+  productId : Long
+  name : String
+  description : String
+  severity : Severity
+  creatorName : String
+  clientId : String
+  priority : Priority
+  creationDate : LocalDateTime
+  resolvedDate : LocalDateTime
+  expirationDate : LocalDateTime
+  state : State
+}
+
+class "TicketController" {
+  ticketService : TicketService
+  updateTicketService : UpdateTicketService
+  createTicket(TicketCreationRequest) : Ticket
+  createTicket(TicketUpdateRequest) : Ticket
+  getTicketInfo(long) : Ticket
+  getTicketsByProductId(long) : List<Ticket>
+}
+
+class "TicketCreationRequest" {
+  name : String
+  productId : long
+  description : String
+  severity : Severity
+  creator : String
+  clientId : String
+  state : State
+}
+
+class "TicketMapper" {
+  mapToTicket(TicketUpdateRequest) : Ticket
+  mapToTicket(TicketCreationRequest) : Ticket
+}
+
+interface "TicketRepository" {
+  findByName(String) : List<Ticket>
+  findByProductId(Long) : List<Ticket>
+}
+
+interface "TicketRequest"
+
+class "TicketService" {
+  ticketRepository : TicketRepository
+  ticketMapper : TicketMapper
+  createTicket(TicketCreationRequest) : Ticket
+  deleteById(long)
+  findAllTickets() : List<Ticket>
+  findByName(String) : List<Ticket>
+  findByProductId(Long) : List<Ticket>
+  findTicketInfo(long) : Ticket
+}
+
+class "TicketUpdateRequest" {
+  id : long
+  productId : long
+  name : String
+  description : String
+  severity : Severity
+  creator : String
+  clientId : String
+  state : State
+}
+
+class "UnknownTicketException"
+
+class "UpdateTicketService" {
+  ticketRepository : TicketRepository
+  mapper : TicketMapper
+  updateTicketInfo(TicketUpdateRequest) : Ticket
+}
+
+"TicketController" --> "Ticket" : use
+"TicketController" --> "TicketCreationRequest" : use as ticketCreationRequest
+"TicketController" --> "TicketService" : ticketService
+"TicketController" --> "TicketUpdateRequest" : use as ticketCreationRequest
+"TicketController" --> "UpdateTicketService" : updateTicketService
+"TicketCreationRequest" --> "Severity" : severity
+"TicketCreationRequest" --> "State" : state
+"TicketMapper" --> "Ticket" : use
+"TicketMapper" --> "TicketCreationRequest" : use as ticketCreationRequest
+"TicketMapper" --> "TicketUpdateRequest" : use as ticketUpdateRequest
+"Ticket" --> "Priority" : priority
+"TicketRepository" --> "*" "Ticket" : use
+"TicketRequest" <|-- "TicketCreationRequest"
+"TicketRequest" <|-- "TicketUpdateRequest"
+"TicketService" --> "Ticket" : use
+"TicketService" --> "TicketCreationRequest" : use as ticketCreationRequest
+"TicketService" --> "TicketMapper" : ticketMapper
+"TicketService" --> "TicketRepository" : ticketRepository
+"Ticket" --> "Severity" : severity
+"Ticket" --> "State" : state
+"TicketUpdateRequest" --> "Severity" : severity
+"TicketUpdateRequest" --> "State" : state
+"UpdateTicketService" --> "Ticket" : use
+"UpdateTicketService" --> "TicketMapper" : mapper
+"UpdateTicketService" --> "TicketRepository" : ticketRepository
+"UpdateTicketService" --> "TicketUpdateRequest" : use as ticketUpdate
+
+@enduml
