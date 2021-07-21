@@ -51,7 +51,7 @@ public class CRUDTicketsStepdefs {
                 Severity.S1,
                 creator,
                 "1",
-                State.IN_PROGRESS
+                State.EN_PROGRESO
         );
         this.ticketService.createTicket(ticketCreationRequest);
 
@@ -66,7 +66,7 @@ public class CRUDTicketsStepdefs {
                 Severity.S1,
                 creator,
                 "1",
-                State.IN_PROGRESS
+                State.EN_PROGRESO
         );
         this.ticketService.createTicket(ticketCreationRequest);
     }
@@ -126,7 +126,7 @@ public class CRUDTicketsStepdefs {
                     Severity.S2,
                     "aaa",
                     "1",
-                    State.RESOLVED
+                    State.RESUELTO
             );
 
         }
