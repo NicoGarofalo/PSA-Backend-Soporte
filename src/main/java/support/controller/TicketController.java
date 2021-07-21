@@ -2,6 +2,7 @@ package support.controller;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.sql.Update;
+import support.exception.UnknownProductException;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,11 @@ public class TicketController {
 
     @GetMapping("/ticket/product/{productId}")
     public List<Ticket> getTicketsByProductId(@PathVariable long productId){
-        return this.ticketService.findByProductId(productId);
+        List<Ticket> tickets = this.ticketService.findByProductId(productId);
+        if(tickets.isEmpty()){
+            throw new UnknownProductException();
+        }
+        return tickets;
     }
 
     @GetMapping("/ticket/{ticketId}")
