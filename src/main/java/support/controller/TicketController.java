@@ -3,6 +3,7 @@ package support.controller;
 import lombok.AllArgsConstructor;
 import org.hibernate.sql.Update;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reactor.core.publisher.Flux;
@@ -23,6 +24,7 @@ import support.service.UpdateTicketService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class TicketController {
 
