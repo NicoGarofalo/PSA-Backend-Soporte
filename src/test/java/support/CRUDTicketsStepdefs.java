@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import support.exception.UnknownTicketException;
 import support.mapper.TicketMapper;
-import support.model.Client;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import support.model.TicketUpdateRequest;
@@ -89,7 +88,7 @@ public class CRUDTicketsStepdefs {
 
         long ticketId = ticket_list.isEmpty() ? 999999 : ticket_list.get(0).getId();
         try{
-            this.ticketService.deleteById(ticketId);
+            this.ticketService.deleteTicketById(ticketId);
         } catch(UnknownTicketException ute){
             this.ute = ute;
         }
