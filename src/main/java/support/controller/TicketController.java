@@ -2,6 +2,7 @@ package support.controller;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.sql.Update;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import support.exception.UnknownProductException;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
@@ -50,6 +51,11 @@ public class TicketController {
     @GetMapping("/ticket/{ticketId}")
     public Ticket getTicketInfo(@PathVariable long ticketId){
         return this.ticketService.findTicketInfo(ticketId);
+    }
+
+    @DeleteMapping("/ticket/{ticketId}")
+    public void deleteTicket(@PathVariable long ticketId){
+        this.ticketService.deleteTicket(ticketId);
     }
 
 

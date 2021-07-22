@@ -32,6 +32,10 @@ public class TicketService {
         return this.ticketRepository.findById(ticketId).orElseThrow(UnknownTicketException::new);
     }
 
+    public void deleteTicket(long ticketId){
+        this.ticketRepository.deleteById(ticketId);
+    }
+
     public Ticket createTicket(TicketCreationRequest ticketCreationRequest){
         return this.ticketRepository.save(this.ticketMapper.mapToTicket(ticketCreationRequest));
     }
