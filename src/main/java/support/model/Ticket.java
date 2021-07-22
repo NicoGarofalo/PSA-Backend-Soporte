@@ -26,7 +26,7 @@ public class Ticket {
     private String description;
     private Severity severity;
     private String creatorName;
-    private String clientId;
+    private long clientId;
     private Priority priority;
     private LocalDateTime creationDate;
     private LocalDateTime resolvedDate;

@@ -50,7 +50,7 @@ public class CRUDTicketsStepdefs {
                 description,
                 Severity.S1,
                 creator,
-                "1",
+                1L,
                 State.EN_PROGRESO,
                 Priority.BAJA
         );
@@ -66,7 +66,7 @@ public class CRUDTicketsStepdefs {
                 description,
                 Severity.S1,
                 creator,
-                "1",
+                1L,
                 State.EN_PROGRESO,
                 Priority.BAJA
         );
@@ -128,7 +128,7 @@ public class CRUDTicketsStepdefs {
                     "aaa",
                     Severity.S2,
                     "aaa",
-                    "1",
+                    1L,
                     State.RESUELTO,
                     Priority.BAJA
             );

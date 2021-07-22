@@ -15,7 +15,7 @@ public class TicketUpdateRequest implements TicketRequest{
     private final String description;
     private final Severity severity;
     private final String creator;
-    private final String clientId;
+    private final long clientId;
     private final State state;
     private final Priority priority;
 

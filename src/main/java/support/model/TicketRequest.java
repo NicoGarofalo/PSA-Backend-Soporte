@@ -9,7 +9,7 @@ public interface TicketRequest {
     String getDescription();
     Severity getSeverity();
     String getCreator();
-    String getClientId();
+    long getClientId();
     State getState();
     long getProductId();
     Priority getPriority();
