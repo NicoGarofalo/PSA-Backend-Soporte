@@ -40,8 +40,8 @@ public class TicketController {
 
     @PostMapping(path = "/ticket/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Ticket createTicket(@RequestBody TicketUpdateRequest ticketCreationRequest){
-        return this.updateTicketService.updateTicketInfo(ticketCreationRequest);
+    public Ticket updateTicket(@RequestBody TicketUpdateRequest ticketUpdateRequest){
+        return this.updateTicketService.updateTicketInfo(ticketUpdateRequest);
     }
 
     @GetMapping(path = "/ticket", produces = MediaType.APPLICATION_JSON_VALUE)

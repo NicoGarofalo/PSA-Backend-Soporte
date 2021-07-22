@@ -10,6 +10,7 @@ import support.mapper.TicketMapper;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import support.model.TicketUpdateRequest;
+import support.model.enums.Priority;
 import support.model.enums.Severity;
 import support.model.enums.State;
 import support.repository.TicketRepository;
@@ -50,7 +51,8 @@ public class CRUDTicketsStepdefs {
                 Severity.S1,
                 creator,
                 "1",
-                State.EN_PROGRESO
+                State.EN_PROGRESO,
+                Priority.BAJA
         );
         this.ticketService.createTicket(ticketCreationRequest);
 
@@ -65,7 +67,8 @@ public class CRUDTicketsStepdefs {
                 Severity.S1,
                 creator,
                 "1",
-                State.EN_PROGRESO
+                State.EN_PROGRESO,
+                Priority.BAJA
         );
         this.ticketService.createTicket(ticketCreationRequest);
     }
@@ -113,7 +116,8 @@ public class CRUDTicketsStepdefs {
                     ticket.getSeverity(),
                     ticket.getCreatorName(),
                     ticket.getClientId(),
-                    ticket.getState()
+                    ticket.getState(),
+                    ticket.getPriority()
             );
         }
         else{
@@ -125,7 +129,8 @@ public class CRUDTicketsStepdefs {
                     Severity.S2,
                     "aaa",
                     "1",
-                    State.RESUELTO
+                    State.RESUELTO,
+                    Priority.BAJA
             );
 
         }

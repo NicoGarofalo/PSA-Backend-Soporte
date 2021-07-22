@@ -2,6 +2,7 @@ package support.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import support.model.enums.Priority;
 import support.model.enums.Severity;
 import support.model.enums.State;
 
@@ -16,4 +17,5 @@ public class TicketCreationRequest implements TicketRequest{
     private final String creator;
     private final String clientId;
     private final State state;
+    private final Priority priority;
 }
