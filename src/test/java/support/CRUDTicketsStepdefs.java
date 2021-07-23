@@ -52,7 +52,8 @@ public class CRUDTicketsStepdefs {
                 creator,
                 1L,
                 State.EN_PROGRESO,
-                Priority.BAJA
+                Priority.BAJA,
+                1L
         );
         this.ticketService.createTicket(ticketCreationRequest);
 
@@ -68,7 +69,8 @@ public class CRUDTicketsStepdefs {
                 creator,
                 1L,
                 State.EN_PROGRESO,
-                Priority.BAJA
+                Priority.BAJA,
+                1L
         );
         this.ticketService.createTicket(ticketCreationRequest);
     }
@@ -117,7 +119,8 @@ public class CRUDTicketsStepdefs {
                     ticket.getCreatorName(),
                     ticket.getClientId(),
                     ticket.getState(),
-                    ticket.getPriority()
+                    ticket.getPriority(),
+                    ticket.getResponsableId()
             );
         }
         else{
@@ -130,7 +133,8 @@ public class CRUDTicketsStepdefs {
                     "aaa",
                     1L,
                     State.RESUELTO,
-                    Priority.BAJA
+                    Priority.BAJA,
+                    1L
             );
 
         }

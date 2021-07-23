@@ -18,4 +18,5 @@ public class TicketCreationRequest implements TicketRequest{
     private final long clientId;
     private final State state;
     private final Priority priority;
+    private final long responsableId;
 }

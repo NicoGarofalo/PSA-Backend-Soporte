@@ -13,4 +13,5 @@ public interface TicketRequest {
     State getState();
     long getProductId();
     Priority getPriority();
+    long getResponsableId();
 }

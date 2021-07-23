@@ -32,4 +32,5 @@ public class Ticket {
     private LocalDateTime resolvedDate;
     private LocalDateTime expirationDate;
     private State state;
+    private long responsableId;
 }
