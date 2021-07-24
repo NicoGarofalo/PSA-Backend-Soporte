@@ -1,14 +1,13 @@
 package support.controller;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.sql.Update;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reactor.core.publisher.Flux;
 import support.exception.UnknownProductException;
-import support.model.Client;
+import support.resource.client.model.Client;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import support.model.TicketUpdateRequest;
-import support.resource.ClientResource;
+import support.resource.client.ClientResource;
 import support.service.TicketService;
 import support.service.UpdateTicketService;
 
@@ -77,6 +76,21 @@ public class TicketController {
     @ResponseBody
     public Flux<Client> getClients(){
         return this.clientResource.getClients();
+    }
+
+
+    @GetMapping(path = "/ticket/{ticketId}/task", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Ticket getTicketTasks(@PathVariable long ticketId){
+        return this.ticketService.findTicketInfo(ticketId);
+    }
+
+    @PostMapping(path = "/ticket/{ticketId}/task/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void getTicketTasks(
+            @PathVariable long ticketId,
+            @PathVariable long taskId){
+        this.ticketService.postTicketAndTaskRelation(ticketId, taskId);
     }
 
 

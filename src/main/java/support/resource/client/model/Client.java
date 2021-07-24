@@ -1,4 +1,4 @@
-package support.model;
+package support.resource.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;

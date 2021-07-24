@@ -34,7 +34,7 @@ public class TicketMapper {
         ticket.setProductId(ticketRequest.getProductId());
         ticket.setState(ticketRequest.getState());
         ticket.setPriority(ticketRequest.getPriority());
-        ticket.setResponsableId(ticket.getResponsableId());
+        ticket.setResponsableId(ticketRequest.getResponsableId());
 
         return ticket;
     }

@@ -1,13 +1,11 @@
-package support.resource;
+package support.resource.client;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-import support.model.Client;
-
-import java.util.List;
+import support.resource.client.model.Client;
 
 @Component
 public class ClientResource {
