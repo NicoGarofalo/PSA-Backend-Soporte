@@ -23,7 +23,7 @@ public class TicketMapper {
         return this.mapTicketInfo(ticketUpdateRequest, ticket);
     }
 
-
+    //TODO: fixear las fechas para el update, no deberian recalcularse, sino usar las viejas.
     private Ticket mapTicketInfo(TicketRequest ticketRequest, Ticket ticket){
         ticket.setName(ticketRequest.getName());
         ticket.setClientId(ticketRequest.getClientId());
@@ -31,7 +31,7 @@ public class TicketMapper {
         ticket.setSeverity(ticketRequest.getSeverity());
         ticket.setCreatorName(ticketRequest.getCreator());
         ticket.setCreationDate(LocalDateTime.now());
-        ticket.setExpirationDate(LocalDateTime.now());
+        //ticket.setExpirationDate(LocalDateTime.now());
         ticket.setProductId(ticketRequest.getProductId());
         ticket.setState(ticketRequest.getState());
         ticket.setPriority(ticketRequest.getPriority());
@@ -42,7 +42,28 @@ public class TicketMapper {
         }else{
             ticket.setResolvedDate(null);
         }
+        ticket.setExpirationDate(this.calculateExpirationDate(ticketRequest.getSeverity(), LocalDateTime.now()));
 
         return ticket;
+    }
+
+    private LocalDateTime calculateExpirationDate(Severity severity, LocalDateTime date){
+        LocalDateTime new_date;
+        if (severity.equals(Severity.S1)){
+            new_date = date.plusDays(7);
+        }
+        else if (severity.equals(Severity.S2)){
+            new_date = date.plusDays(30);
+        }
+        else if (severity.equals(Severity.S3)){
+            new_date = date.plusDays(90);
+        }
+        else if (severity.equals(Severity.S4)){
+            new_date = date.plusDays(365);
+        }
+        else {
+            new_date = date;
+        }
+        return new_date;
     }
 }
