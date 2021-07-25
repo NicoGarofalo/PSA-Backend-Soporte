@@ -6,6 +6,7 @@ import support.model.TicketCreationRequest;
 import support.model.TicketRequest;
 import support.model.TicketUpdateRequest;
 import support.model.enums.State;
+import support.model.enums.Severity:
 
 import java.time.LocalDateTime;
 
