@@ -10,4 +10,5 @@ import java.util.List;
 public interface TicketTaskRelationRepository extends JpaRepository<TicketTaskRelation, Long> {
 
     List<TicketTaskRelation> findByTicketId(long ticketId);
+    void deleteByTicketId(long ticketId);
 }

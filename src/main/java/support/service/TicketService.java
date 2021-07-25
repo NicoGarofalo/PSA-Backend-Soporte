@@ -66,6 +66,7 @@ public class TicketService {
     public void deleteTicketById(long id){
         try {
             this.ticketRepository.deleteById(id);
+            this.ticketTaskRelationRepository.deleteByTicketId(id);
         }catch(EmptyResultDataAccessException erdae){
             throw new UnknownTicketException(erdae.getMessage());
         }

@@ -5,6 +5,7 @@ import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import support.model.TicketRequest;
 import support.model.TicketUpdateRequest;
+import support.model.enums.State;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,12 @@ public class TicketMapper {
         ticket.setState(ticketRequest.getState());
         ticket.setPriority(ticketRequest.getPriority());
         ticket.setResponsableId(ticketRequest.getResponsableId());
+
+        if(ticketRequest.getState().equals(State.RESUELTO)){
+            ticket.setResolvedDate(LocalDateTime.now());
+        }else{
+            ticket.setResolvedDate(null);
+        }
 
         return ticket;
     }
