@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import support.model.TicketTaskRelation;
 import support.model.TicketTaskReponse;
 import support.repository.TicketRepository;
-import support.exception.UnknownTicketException;
 import support.repository.TicketTaskRelationRepository;
 import support.resource.proyect.ProjectResource;
 import support.resource.task.TaskResource;
@@ -22,8 +21,6 @@ import support.resource.task.model.Task;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,7 +73,7 @@ public class TicketService {
         Map<Long, List<Task>> proyectIdWithTasks = this.ticketTaskRelationRepository
                 .findByTicketId(ticketId).stream()
                 .map(ticketTaskRelation -> this.taskResource.getTask(ticketTaskRelation.getTaskId()))
-                .collect(Collectors.groupingBy(Task::getProyectId));
+                .collect(Collectors.groupingBy(Task::getProject));
 
         HashMap<String, List<String>> wantedMap = new HashMap<>();
 
@@ -100,7 +97,9 @@ public class TicketService {
     }
 
     public void postTicketAndTaskRelation(long ticketId, long taskId) {
-        TicketTaskRelation ticketTaskRelation = new TicketTaskRelation(ticketId, taskId);
+        TicketTaskRelation ticketTaskRelation = new TicketTaskRelation();
+        ticketTaskRelation.setTicketId(ticketId);
+        ticketTaskRelation.setTaskId(taskId);
         this.ticketTaskRelationRepository.save(ticketTaskRelation);
     }
 }

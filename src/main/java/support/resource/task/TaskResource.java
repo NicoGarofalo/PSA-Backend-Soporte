@@ -21,7 +21,7 @@ public class TaskResource {
     }
 
     public Task getTask(long taskId){
-        return this.webClient.get().uri("tasks/{}/", taskId).retrieve().bodyToMono(Task.class).block();
+        return this.webClient.get().uri(String.format("api/tasks/%s/", taskId)).retrieve().bodyToMono(Task.class).block();
     }
 
 }

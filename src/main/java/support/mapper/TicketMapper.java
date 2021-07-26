@@ -15,12 +15,20 @@ public class TicketMapper {
 
     public Ticket mapToTicket(TicketCreationRequest ticketCreationRequest){
         Ticket ticket = new Ticket();
+        ticket.setCreationDate(LocalDateTime.now());
         return this.mapTicketInfo(ticketCreationRequest, ticket);
     }
 
-    public Ticket mapToTicket(TicketUpdateRequest ticketUpdateRequest){
+    public Ticket mapToTicket(TicketUpdateRequest ticketUpdateRequest, State state){
         Ticket ticket = new Ticket();
         ticket.setId(ticketUpdateRequest.getId());
+
+        if(state != ticketUpdateRequest.getState() && ticketUpdateRequest.getState().equals(State.RESUELTO)){
+            ticket.setResolvedDate(LocalDateTime.now());
+        }else{
+            ticket.setResolvedDate(null);
+        }
+
         return this.mapTicketInfo(ticketUpdateRequest, ticket);
     }
 
@@ -31,19 +39,12 @@ public class TicketMapper {
         ticket.setDescription(ticketRequest.getDescription());
         ticket.setSeverity(ticketRequest.getSeverity());
         ticket.setCreatorName(ticketRequest.getCreator());
-        ticket.setCreationDate(LocalDateTime.now());
-        //ticket.setExpirationDate(LocalDateTime.now());
         ticket.setProductId(ticketRequest.getProductId());
         ticket.setState(ticketRequest.getState());
         ticket.setPriority(ticketRequest.getPriority());
         ticket.setResponsableId(ticketRequest.getResponsableId());
 
-        if(ticketRequest.getState().equals(State.RESUELTO)){
-            ticket.setResolvedDate(LocalDateTime.now());
-        }else{
-            ticket.setResolvedDate(null);
-        }
-        ticket.setExpirationDate(this.calculateExpirationDate(ticketRequest.getSeverity(), LocalDateTime.now()));
+        ticket.setExpirationDate(this.calculateExpirationDate(ticketRequest.getSeverity(), ticket.getCreationDate()));
 
         return ticket;
     }

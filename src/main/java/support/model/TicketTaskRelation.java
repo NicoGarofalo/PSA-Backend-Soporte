@@ -1,5 +1,6 @@
 package support.model;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +14,10 @@ import javax.persistence.Id;
 @Setter
 @Entity
 @EqualsAndHashCode
-@RequiredArgsConstructor
 public class TicketTaskRelation {
     @Id
     @GeneratedValue
     private Long id;
-    private final long ticketId;
-    private final long taskId;
+    private long ticketId;
+    private long taskId;
 }

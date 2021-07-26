@@ -9,5 +9,5 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Task {
     private String name;
-    private long proyectId;
+    private long project;
 }
