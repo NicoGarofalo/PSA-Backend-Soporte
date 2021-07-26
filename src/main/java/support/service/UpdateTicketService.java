@@ -21,6 +21,6 @@ public class UpdateTicketService {
     
     public Ticket updateTicketInfo(TicketUpdateRequest ticketUpdate){
         Ticket ticket = this.ticketRepository.findById(ticketUpdate.getId()).orElseThrow(UnknownTicketException::new);
-        return this.ticketRepository.save(mapper.mapToTicket(ticketUpdate, ticket.getState()));
+        return this.ticketRepository.save(mapper.mapToTicket(ticketUpdate, ticket));
     }
 }

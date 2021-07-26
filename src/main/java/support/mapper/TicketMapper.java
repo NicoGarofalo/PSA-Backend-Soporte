@@ -19,11 +19,12 @@ public class TicketMapper {
         return this.mapTicketInfo(ticketCreationRequest, ticket);
     }
 
-    public Ticket mapToTicket(TicketUpdateRequest ticketUpdateRequest, State state){
+    public Ticket mapToTicket(TicketUpdateRequest ticketUpdateRequest, Ticket actualTicket){
         Ticket ticket = new Ticket();
         ticket.setId(ticketUpdateRequest.getId());
+        ticket.setCreationDate(actualTicket.getCreationDate());
 
-        if(state != ticketUpdateRequest.getState() && ticketUpdateRequest.getState().equals(State.RESUELTO)){
+        if(actualTicket.getState() != ticketUpdateRequest.getState() && ticketUpdateRequest.getState().equals(State.RESUELTO)){
             ticket.setResolvedDate(LocalDateTime.now());
         }else{
             ticket.setResolvedDate(null);
