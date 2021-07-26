@@ -6,12 +6,12 @@ import reactor.util.function.Tuples;
 import support.exception.UnknownTicketException;
 import lombok.AllArgsConstructor;
 import support.mapper.TicketMapper;
+import support.model.ProjectAndTasksResponse;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import support.model.TicketTaskRelation;
-import support.model.TicketTaskReponse;
 import support.repository.TicketRepository;
 import support.repository.TicketTaskRelationRepository;
 import support.resource.proyect.ProjectResource;
@@ -19,6 +19,7 @@ import support.resource.task.TaskResource;
 import support.resource.task.model.Task;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -69,13 +70,13 @@ public class TicketService {
         }
     }
 
-    public TicketTaskReponse findTicketTasks(long ticketId){
+    public List<ProjectAndTasksResponse> findTicketTasks(long ticketId){
         Map<Long, List<Task>> proyectIdWithTasks = this.ticketTaskRelationRepository
                 .findByTicketId(ticketId).stream()
                 .map(ticketTaskRelation -> this.taskResource.getTask(ticketTaskRelation.getTaskId()))
                 .collect(Collectors.groupingBy(Task::getProject));
 
-        HashMap<String, List<String>> wantedMap = new HashMap<>();
+        List<ProjectAndTasksResponse> wantedList = new LinkedList<>();
 
         List<Tuple2<Long, String>> projectNames =
                 proyectIdWithTasks.keySet()
@@ -90,10 +91,10 @@ public class TicketService {
         projectNames.forEach(tuple -> {
             String proyectName = tuple.getT2();
             List<String> projectTasksNames = proyectIdWithTasks.get(tuple.getT1()).stream().map(Task::getName).collect(Collectors.toList());
-            wantedMap.put(proyectName, projectTasksNames);
+            wantedList.add(new ProjectAndTasksResponse(proyectName, projectTasksNames));
         });
 
-        return new TicketTaskReponse(wantedMap);
+        return wantedList;
     }
 
     public void postTicketAndTaskRelation(long ticketId, long taskId) {

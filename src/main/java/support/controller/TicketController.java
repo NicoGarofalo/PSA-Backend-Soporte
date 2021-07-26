@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import reactor.core.publisher.Flux;
 import support.exception.UnknownProductException;
-import support.model.TicketTaskReponse;
+import support.model.ProjectAndTasksResponse;
 import support.resource.client.model.Client;
 import support.model.Ticket;
 import support.model.TicketCreationRequest;
@@ -82,7 +82,7 @@ public class TicketController {
 
     @GetMapping(path = "/ticket/{ticketId}/task", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public TicketTaskReponse getTicketTasks(@PathVariable long ticketId){
+    public List<ProjectAndTasksResponse> getTicketTasks(@PathVariable long ticketId){
         return this.ticketService.findTicketTasks(ticketId);
     }
 
