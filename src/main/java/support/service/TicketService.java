@@ -101,6 +101,8 @@ public class TicketService {
         TicketTaskRelation ticketTaskRelation = new TicketTaskRelation();
         ticketTaskRelation.setTicketId(ticketId);
         ticketTaskRelation.setTaskId(taskId);
-        this.ticketTaskRelationRepository.save(ticketTaskRelation);
+        if(this.ticketTaskRelationRepository.findByTicketId(ticketId).stream().noneMatch(relation -> relation.getTaskId() == taskId)) {
+            this.ticketTaskRelationRepository.save(ticketTaskRelation);
+        }
     }
 }
