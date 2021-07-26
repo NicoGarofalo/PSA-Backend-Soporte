@@ -1,6 +1,7 @@
 package support.service;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 import support.exception.UnknownTicketException;
@@ -61,6 +62,7 @@ public class TicketService {
         return this.ticketRepository.findByProductId(productId);
     }
 
+    @Transactional
     public void deleteTicketById(long id){
         try {
             this.ticketRepository.deleteById(id);
