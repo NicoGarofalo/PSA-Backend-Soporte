@@ -20,6 +20,6 @@ public class ProjectResource {
     }
 
     public Project getProject(long projectId){
-        return this.webClient.get().uri(String.format("api/projects/%s/", projectId)).retrieve().bodyToMono(Project.class).block();
+        return this.webClient.get().uri(String.format("api/projects/%s/", projectId)).retrieve().bodyToMono(Project.class).onErrorReturn(new Project()).block();
     }
 }
